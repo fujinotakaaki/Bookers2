@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @book_new = Book.new
     @books = @user.books
+    @favorites = current_user.favorites
   end
 
   def update
