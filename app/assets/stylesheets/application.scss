@@ -23,41 +23,20 @@
 }
 a{
   text-decoration: none;
-}
-a:hover{
-  background-color: black;
-}
-table{
-  width: 100%;
-  margin-bottom: 30px;
-}
-tr{
-  width: 100%;
-  border-top: thin solid darkgray;
-}
-tr:first-child{
-  border-top: none;
-}
-tr:nth-child(n+2):hover{
-  background-color: gainsboro;
-}
-td{
-  width: 28%;
-  margin: 5px 0 5px 2%;
-}
-td:first-child{
-  font-size: 0px;
+  &:hover{
+    background-color: black;
+  }
 }
 img{
   margin: 10px;
 }
 ul{
   margin: 5px 0;
-}
-ul li{
-  list-style: none;
-  display: inline-block;
-  padding: 0 5px;
+  li{
+    list-style: none;
+    display: inline-block;
+    padding: 0 5px;
+  }
 }
 .btn{
   padding: 5px;
@@ -67,9 +46,9 @@ ul li{
 header{
   background-color: black;
   color: white;
+  nav{
+    text-align: right;
 }
-header nav{
-  text-align: right;
 }
 header nav li{
   list-style: none;
@@ -172,4 +151,32 @@ header a:hover{
 .destroy-btn:hover{
   color: whitesmoke;
   background-color: crimson;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 30px;
+  tr {
+    width: 100%;
+    border-top: thin solid darkgray;
+    &:first-child{
+      border-top: none;
+    }
+    &:nth-child(n+2):hover{
+      background-color: gainsboro;
+    }
+    .comment-count, .btn-space {
+      width: 125px;
+    }
+    td {
+       word-break: break-word;
+       padding: 0 5px;
+      &:first-child{
+        font-size: 0px;
+      }
+      &:nth-child(n+4) {
+        text-align: center;
+      }
+    }
+  }
 }
