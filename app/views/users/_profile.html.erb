@@ -1,21 +1,41 @@
 <h2>User info</h2>
 <%= attachment_image_tag person, :profile_image, size:'100x100', format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
-<table>
+<table id='profile-table'>
   <tr>
     <th></th>
     <th></th>
   </tr>
   <tr>
-    <td class="profile-headline"><b>name</b></td>
+    <th class="profile-headline"><b>name</b></th>
     <td><%= person.name %></td>
   </tr>
   <tr>
-    <td class="profile-headline"><b>introduction</b></td>
+    <th class="profile-headline"><b>introduction</b></th>
     <td><%= person.introduction %></td>
   </tr>
+  <tr>
+    <th class="profile-headline"><b>follows</b></th>
+    <td><%= link_to Relationship.where( follower_id: person.id ).count, relationships_path( follower_id: person.id ) %></td>
+  </tr>
+  <tr>
+    <th class="profile-headline"><b>followers</b></th>
+    <td><%= link_to Relationship.where( follow_id: person.id ).count, relationships_path( follow_id: person.id ) %></td>
+  </tr>
 </table>
-<%= link_to current_user == person ? edit_user_path(current_user) : user_path(current_user) do %>
-<div class="btn btn-default input-form-size">
-  <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+
+<div class="profile-bottom">
+  <% if person.id != current_user.id  then %>
+  <% if person.followed_by?( current_user.id ) then %>
+  <!--YES-->
+  <%= link_to 'フォローを外す', user_relationship_path( person ), method: :delete, class: "btn btn-danger" %>
+  <% else %>
+  <!--NO-->
+  <%= link_to 'フォローする', user_relationship_path( person ), method: :post, class: "btn btn-success" %>
+  <% end %>
+  <% end %>
+  <%= link_to current_user == person ? edit_user_path(current_user) : user_path(current_user) do %>
+  <div class="btn btn-default input-form-size">
+    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+  </div>
 </div>
 <% end %>

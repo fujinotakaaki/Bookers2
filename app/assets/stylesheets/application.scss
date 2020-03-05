@@ -48,24 +48,25 @@ header{
   color: white;
   nav{
     text-align: right;
-}
-}
-header nav li{
-  list-style: none;
-  display: inline-block;
-  padding: 0 5px;
-  margin: 5px 0;
-  font-family: "Glyphicons Halflings Arial";
+    li{
+      list-style: none;
+      display: inline-block;
+      padding: 0 5px;
+      margin: 5px 0;
+      font-family: "Glyphicons Halflings Arial";
+    }
+  }
 }
 h1{
   margin: 0;
   padding: 10px 0 0;
 }
+
 header a{
   color: dimgray;
-}
-header a:hover{
-  color: gainsboro;
+  &:hover{
+    color: gainsboro;
+  }
 }
 
 /*footer*/
@@ -78,10 +79,10 @@ header a:hover{
   border-color: lawngreen;
   color: gray;
   border-radius: 4px;
-}
-.login-btn:hover{
-  background-color: green;
-  color: white;
+  &:hover{
+    background-color: green;
+    color: white;
+  }
 }
 .signup-btn{
   width: 100%;
@@ -89,10 +90,10 @@ header a:hover{
   border-color: skyblue;
   color: gray;
   border-radius: 4px;
-}
-.signup-btn:hover{
-  background-color: royalblue;
-  color: white;
+  &:hover{
+    background-color: royalblue;
+    color: white;
+  }
 }
 .top-h1{
   line-height: 3.0;
@@ -118,13 +119,13 @@ header a:hover{
   border-left: thin solid lightcyan;
   border-right: thin solid #009FDF;
   border-bottom: thin solid #009FDF;
-}
-.create-book-btn:hover{
-  background-color: #1E90FF;
-  border-top: thin solid #009FDF;
-  border-left: thin solid #009FDF;
-  border-right: thin solid lightcyan;
-  border-bottom: thin solid lightcyan;
+  &:hover{
+    background-color: #1E90FF;
+    border-top: thin solid #009FDF;
+    border-left: thin solid #009FDF;
+    border-right: thin solid lightcyan;
+    border-bottom: thin solid lightcyan;
+  }
 }
 
 /*books#show*/
@@ -166,7 +167,7 @@ table {
       background-color: gainsboro;
     }
     .comment-count, .btn-space {
-      width: 125px;
+      min-width: 125px;
     }
     td {
        word-break: break-word;

@@ -55,7 +55,7 @@
             <% end %>
           </td>
           <td>コメント数：<%= @book.book_comments.count %></td>
-          <td>
+          <td class='btn-space'>
             <% if current_user.id == @book.user_id then %>
             <ul>
               <li><%= link_to "Edit", edit_book_path(@book), class: "edit-btn" %></li>
