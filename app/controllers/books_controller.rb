@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-
+  # before_action :set_book, only: [:show, :edit, :update, :destroy]
   def create
     @book_new = Book.new(book_params)
     @book_new.user_id = current_user.id
@@ -7,6 +7,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book_new), notice: 'You have created book successfully.'
     else
       @books = Book.all
+      @favorites = current_user.favorites
       render :index
     end
   end
@@ -27,11 +28,13 @@ class BooksController < ApplicationController
   def index
     @book_new = Book.new
     @books = Book.all
+    @favorites = current_user.favorites
   end
 
   def show
     @book_new = Book.new
     @book = Book.find(params[:id])
+    @book_comment = BookComment.new
   end
 
   def update

@@ -22,3 +22,9 @@ Book.create(
   body: ("sample#{i}"*10)
 )
 end
+# 101.times do |i|
+#   Favorite.create(
+#     user_id: 1,
+#     book_id: 1
+#   )
+# end
