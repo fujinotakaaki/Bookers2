@@ -11,4 +11,9 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :follows, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
+  def followed_by?( follower_user_id )
+    # logger.debug 'ここみろ'
+    # logger.debug self.inspect
+    Relationship.where( follower_id: follower_user_id )&.find_by( follow_id: id ).present?
+  end
 end

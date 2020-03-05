@@ -1,3 +1,32 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-bottom {
+  width: 100%;
+  a {
+    width:inherit;
+    margin: 10px 0;
+  }
+}
+
+table {
+  tr {
+    .relationship-td {
+      min-width: 150px;
+      text-align: center;
+    }
+  }
+}
+
+#profile-table {
+  tr {
+    th {
+      box-sizing: border-box;
+      padding: 10px 0 10px 10px;
+    }
+    td {
+      text-align: center;
+    }
+  }
+}

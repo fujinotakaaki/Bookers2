@@ -1,0 +1,34 @@
+<table>
+  <tr>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;image</th>
+    <th>name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% users.each do |user| %>
+  <tr>
+    <td>
+      <%= link_to user_path(user) do %>
+      <%= attachment_image_tag user, :profile_image, size:'100x100', format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+      <% end %>
+    </td>
+    <td><%= user.name %></td>
+    <td class='relationship-td'>フォロー数：<%= Relationship.where( follower_id: user.id ).count %></td>
+    <td class='relationship-td'>フォロワー数：<%= Relationship.where( follow_id: user.id ).count %></td>
+    <td class='relationship-td'>
+      <% if user.id != current_user.id  then %>
+      <% if user.followed_by?( current_user.id ) then %>
+      <!--YES-->
+      <%= link_to 'フォローを外す', user_relationship_path( user ), method: :delete %>
+      <% else %>
+      <!--NO-->
+      <%= link_to 'フォローする', user_relationship_path( user ), method: :post %>
+      <% end %>
+      <% end %>
+    </td>
+    <td><%= link_to 'Show', user_path(user) %></td>
+  </tr>
+  <% end %>
+</table>
