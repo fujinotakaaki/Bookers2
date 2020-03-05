@@ -1,0 +1,29 @@
+<% if not notice.nil? then%>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10"><%= notice %></div>
+  </div>
+</div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-xs-8">
+      <h1 class="top-h1"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>welcome to Bookers !!</h1>
+      <p class="top-p1">
+        In <b><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Bookers</b>,<br>
+        you can share and exchange your opinions , inpressions , and emotions<br>
+        about various books!<br>
+      </p>
+
+      <%= link_to 'Log in', new_user_session_path, class: "btn btn-default login-btn" %>
+      <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-default signup-btn" %>
+      <%#= link_to 'Sign up', new_user_registration_path, class: "btn btn-default" %>
+    </div>
+
+    <!--サイドの余白確保-->
+    <div class="col-md-2"></div>
+    <!--サイドの余白確保-->
+  </div>
+</div>

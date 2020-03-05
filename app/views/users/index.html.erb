@@ -1,0 +1,40 @@
+
+<!--body-->
+<div class="container">
+  <div class="row">
+
+    <!--Plofile_section-->
+    <!--ユーザープロフィール部-->
+    <div class="col-xs-3">
+      <%= render 'users/profile', person: current_user %>
+      <!--新規投稿-->
+      <%= render 'books/new', book_new: @book_new %>
+    </div>
+    <!--Plofile_section-->
+
+    <!--リスト部-->
+    <div class="col-xs-9">
+      <h2>Users</h2>
+      <% title_column = ["image", "name",""] %>
+      <table>
+        <tr>
+          <th><%= title_column.shift %></th>
+          <th><%= title_column.shift %></th>
+          <th><%= title_column.shift %></th>
+        </tr>
+        <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+            <%= attachment_image_tag user, :profile_image, size:'100x100', format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+            <% end %>
+          </td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user_path(user) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <!--リスト部-->
+  </div>
+</div>
