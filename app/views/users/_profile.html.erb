@@ -10,8 +10,12 @@
     <td><%= person.name %></td>
   </tr>
   <tr>
-    <td class="profile-headline"><b>introduction</b></td>
-    <td><%= person.introduction %></td>
+    <td class="profile-headline"><b>follows</b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="profile-headline"><b>followers</b></td>
+    <td></td>
   </tr>
 </table>
 <%= link_to current_user == person ? edit_user_path(current_user) : user_path(current_user) do %>

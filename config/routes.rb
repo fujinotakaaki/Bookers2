@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   devise_for :users
   resources :books, only: [:create, :destroy, :edit, :index, :show, :update] do
     resource :favorite, only: [:create, :destroy]
