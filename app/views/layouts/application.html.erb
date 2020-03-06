@@ -73,13 +73,23 @@
 </header>
 
 <body>
+  <% if user_signed_in? then %>
+  <!--ログイン状態ならば-->
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-offset-9 col-xs-2 col-xs-offset-1">
+        <%= render 'searches/search' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
   <%= yield %>
 </body>
 
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-8 col-md-4">
+      <div class="col-xs-offset-8 col-xs-4">
         <span>© CopyRight Infratop.inc</span>
       </div>
     </div>

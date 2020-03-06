@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users,  only: [                            :edit, :index, :show, :update] do
     resource :relationship,  only: [:create, :destroy]
   end
+  get 'searches' => 'searches#search'
   get '/relationships' => 'relationships#index'
   get '/home/about' => 'users#about'
   root to: 'users#top'
