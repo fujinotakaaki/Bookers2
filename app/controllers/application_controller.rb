@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
-  
+
   def after_sign_in_path_for(resource)
     user_path(resource)
   end
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
   def configure_permitted_parameters
     #devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :name, :postcode, :prefecture_code, :address_city, :address_street])
     # 変更点 2. ↑の行の:name=>:emailに変更（ログイン時email=>nameで認証）
 
     #↓これはログイン時にemailの代わりにnameで代替できるわけではない

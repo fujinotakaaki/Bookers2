@@ -8,25 +8,46 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
-        <%= f.label :Name %><br />
+        <%= f.label :Name %><br>
         <%= f.text_field :name, autofocus: true, autocomplete:  "name", placeholder:"名前" %>
       </div>
 
       <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email %><br>
         <%= f.email_field :email, autocomplete: "email", placeholder:"メールアドレス" %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Postal code' %><br>
+        <%= f.number_field :postcode, placeholder: "ハイフンなし７桁の半角数字で入力" %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Prefecture code' %><br>
+        <%= f.select :prefecture_code, JpPrefecture::Prefecture.all.map{ | x | [ x.name, x.code ] }.to_h, include_blank: "都道府県" %>
+      </div>
+      <%#= JpPrefecture::Prefecture.all.inspect %>
+
+      <div class="field">
+        <%= f.label :address_city %><br>
+        <%= f.text_field :address_city %>
+      </div>
+
+      <div class="field">
+        <%= f.label 'Address stree' %><br>
+        <%= f.text_field :address_street %>
       </div>
 
       <div class="field">
         <%= f.label :password %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
+        <% end %><br>
         <%= f.password_field :password, autocomplete: "new-password", placeholder:"パスワード" %>
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation %><br>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:"パスワード（再入力）" %>
       </div>
 

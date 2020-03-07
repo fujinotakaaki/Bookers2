@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,4 +17,6 @@ class User < ApplicationRecord
     # logger.debug self.inspect
     Relationship.where( follower_id: follower_user_id )&.find_by( follow_id: id ).present?
   end
+
+
 end
