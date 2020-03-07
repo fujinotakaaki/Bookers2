@@ -1,0 +1,5 @@
+
+$("#book-comment-index-<%= @book_comment.book_id %>").html(
+  "<%= escape_javascript( render 'book_comments/index',
+  book_comment: @book_comment,
+  book_id: @book_comment.book_id ) %>" );

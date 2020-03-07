@@ -66,36 +66,9 @@
         </tr>
       </table>
 
-      <h2>BookComment index</h2>
-      <table>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <% @book.book_comments.each do | book_comment | %>
-        <tr>
-          <td><%= attachment_image_tag book_comment.user, :profile_image, size:'30x30', format: 'jpeg', fallback: "no_image.jpg", size:'30x30' %></td>
-          <td style='max-width:200px;'><%= book_comment.comment %></td>
-          <td>
-            <% if book_comment.user_id == current_user.id then %>
-            <%= link_to 'Destroy', book_book_comment_path( book_comment.id ), method: :delete, class: "destroy-btn" %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+      <!--コメント一覧-->
+      <%= render 'book_comments/index', book_comment: @book_comment, book_id: @book.id %>
 
-      <div id='book-comments-form'>
-        <% if @book_comment.errors.any? %>
-        <%= render 'books/show_error_index', unit: @book_comment %>
-        <% end %>
-
-        <%= form_for( @book_comment, url: book_book_comment_path(@book) ) do |f| %>
-        <%= f.text_area :comment %>
-        <%= f.submit "送信" %>
-        <% end %>
-      </div>
     </div>
     <!--リスト部-->
 
