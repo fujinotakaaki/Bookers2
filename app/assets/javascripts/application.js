@@ -26,41 +26,16 @@ $(function(){
     // idの取得
     var a_id = $( this ).attr('id');
     // favoriteボタンであるかの判定
-    if ( !rege_favorite.test( a_id ) ) {
+    if ( ! rege_favorite.test( a_id ) ) {
       // favoriteボタンでなければ終了
       return;
     }
     // favoriteボタンのbook_idを取得
     var book_id = a_id.match( rege_favorite )[1];
-    // alert( 'book_id = ' + book_id + '\nhref = ' + $( this ).attr('href') );
-
-
-
-    // 入力された都市名でWebAPIに天気情報をリクエスト
-    // $.ajax({
-    //   url: 'http://localhost:3000' + $( this ).attr('href'),
-    //   type: $( this ).attr('data-method')
-    //   dataType : 'jsonp',
-    // }).done(function (data){
-    //   //通信成功時の処理
-    //   // 位置
-    //   $('#place').text(data.name);
-    //   // 最高気温
-    //   $('#temp_max').text(data.main.temp_max);
-    //   // 最低気温
-    //   $('#temp_min').text(data.main.temp_min);
-    //   //　湿度
-    //   $('#humidity').text(data.main.humidity);
-    //   //　風速
-    //   $('#speed').text(data.wind.speed);
-    //   // 天気
-    //   $('#weather').text(data.weather[0].main);
-    //   // 天気アイコン
-    //   $('img').attr("src","http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-    //   $('img').attr("alt",data.weather[0].main);
-    // }).fail(function (data) {
-    //   //通信失敗時の処理
-    //   alert('通信に失敗しました。');
-    // });
+    $.ajax({
+      url: 'http://localhost:3000' + $( this ).attr('href'),
+      type: ($( this ).attr('data-method')).toUpperCase(),
+      dataType: 'json'
+    })
   });
 });

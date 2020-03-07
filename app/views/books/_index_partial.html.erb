@@ -17,10 +17,10 @@
     <!--お気に入り登録・解除項目-->
     <% if @favorites.find_by( book_id: book.id ).nil? then %>
     <!--NO => フォローボタンの表示-->
-    <%= link_to book_favorite_path( book ), method: :post, id:"favorite-btn-#{book.id}" do %><i class="far fa-heart"></i><%= book.favorites.count %><% end %>
+    <%= render 'books/create_favorite', book: book %>
     <% else %>
     <!--YES => フォロー解除ボタンの表示-->
-    <%= link_to book_favorite_path( book ), method: :delete, id:"favorite-btn-#{book.id}" do %><i class="fas fa-heart"></i><%= book.favorites.count %><% end %>
+    <%= render 'books/destroy_favorite', book: book %>
     <% end %>
   </td>
   <td>
