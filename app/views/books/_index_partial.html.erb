@@ -1,0 +1,30 @@
+<tr>
+  <td>
+    <!--プロフィール画像-->
+    <%= link_to user_path(book.user_id) do %>
+    <%= attachment_image_tag book.user, :profile_image, size:'100x100', format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+    <% end %>
+  </td>
+  <td>
+    <!--タイトル-->
+    <%= link_to book.title, book_path(book) %>
+  </td>
+  <td style='width: 300px;'>
+    <!--紹介文-->
+    <%= book.body %>
+  </td>
+  <td>
+    <!--お気に入り登録・解除項目-->
+    <% if @favorites.find_by( book_id: book.id ).nil? then %>
+    <!--NO => フォローボタンの表示-->
+    <%= render 'books/create_favorite', book: book %>
+    <% else %>
+    <!--YES => フォロー解除ボタンの表示-->
+    <%= render 'books/destroy_favorite', book: book %>
+    <% end %>
+  </td>
+  <td>
+    <!--紹介文-->
+    コメント数：<%= book.book_comments.count %>
+  </td>
+</tr>

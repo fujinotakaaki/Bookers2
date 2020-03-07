@@ -5,20 +5,14 @@ class BookCommentsController < ApplicationController
     @book_comment = current_user.book_comments.new( book_comment_params )
     @book_comment.book_id = params[:book_id]
     if @book_comment.save then
-      redirect_to book_path( params[:book_id] )
-    else
-      @book = Book.find(params[:book_id] )
-      @book_new = Book.new
-      render 'books/show'
+      @book_comment = BookComment.new( book_id: params[:book_id] )
     end
   end
 
   def destroy
-    # logger.debug 'ここみru'
-    # logger.debug params
     book_comment = BookComment.find(params[:book_id])
     book_comment.destroy
-    redirect_to book_path( book_comment.book_id )
+    @book_comment = BookComment.new( book_id: book_comment.book_id )
   end
 
   private

@@ -43,13 +43,13 @@
           <td><%= link_to book.title, book_path(book) %></td>
           <td style="max-width: 300px;"><%= book.body %></td>
           <td>
-            <!--お気に入り登録しているか？-->
+            <!--お気に入り登録・解除項目-->
             <% if @favorites.find_by( book_id: book.id ).nil? then %>
-            <!--NO-->
-            <%= link_to book_favorite_path( book ), method: :post do %><i class="far fa-heart"></i><%= book.favorites.count %><% end %>
+            <!--NO => フォローボタンの表示-->
+            <%= render 'books/create_favorite', book: book %>
             <% else %>
-            <!--YES-->
-            <%= link_to book_favorite_path( book ), method: :delete do %><i class="fas fa-heart"></i><%= book.favorites.count %><% end %>
+            <!--YES => フォロー解除ボタンの表示-->
+            <%= render 'books/destroy_favorite', book: book %>
             <% end %>
           </td>
           <td>コメント数：<%= book.book_comments.count %></td>

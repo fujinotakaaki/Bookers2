@@ -45,13 +45,13 @@
           <td><%= link_to @book.title, book_path(@book) %></td>
           <td  style='width: 300px;'><%= @book.body %></td>
           <td>
-            <!--お気に入り登録しているか？-->
-            <% if @book.favorites.find_by( user_id: current_user.id ).nil? then %>
-            <!--NO-->
-            <%= link_to book_favorite_path( @book ), method: :post do %><i class="far fa-heart"></i><%= @book.favorites.count %><% end %>
+            <!--お気に入り登録・解除項目-->
+            <% if @favorites.find_by( book_id: @book.id ).nil? then %>
+            <!--NO => フォローボタンの表示-->
+            <%= render 'books/create_favorite', book: @book %>
             <% else %>
-            <!--YES-->
-            <%= link_to book_favorite_path( @book ), method: :delete do %><i class="fas fa-heart"></i><%= @book.favorites.count %><% end %>
+            <!--YES => フォロー解除ボタンの表示-->
+            <%= render 'books/destroy_favorite', book: @book %>
             <% end %>
           </td>
           <td>コメント数：<%= @book.book_comments.count %></td>
@@ -66,36 +66,9 @@
         </tr>
       </table>
 
-      <h2>BookComment index</h2>
-      <table>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <% @book.book_comments.each do | book_comment | %>
-        <tr>
-          <td><%= attachment_image_tag book_comment.user, :profile_image, size:'30x30', format: 'jpeg', fallback: "no_image.jpg", size:'30x30' %></td>
-          <td style='max-width:200px;'><%= book_comment.comment %></td>
-          <td>
-            <% if book_comment.user_id == current_user.id then %>
-            <%= link_to 'Destroy', book_book_comment_path( book_comment.id ), method: :delete, class: "destroy-btn" %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+      <!--コメント一覧-->
+      <%= render 'book_comments/index', book_comment: @book_comment, book_id: @book.id %>
 
-      <div id='book-comments-form'>
-        <% if @book_comment.errors.any? %>
-        <%= render 'books/show_error_index', unit: @book_comment %>
-        <% end %>
-
-        <%= form_for( @book_comment, url: book_book_comment_path(@book) ) do |f| %>
-        <%= f.text_area :comment %>
-        <%= f.submit "送信" %>
-        <% end %>
-      </div>
     </div>
     <!--リスト部-->
 
