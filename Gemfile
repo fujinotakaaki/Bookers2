@@ -74,3 +74,5 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 # 住所検索機能
 gem 'jp_prefecture'
+# APIトークン??Railsで使える環境変数を管理できるgem
+gem 'dotenv-rails'

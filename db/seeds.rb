@@ -6,7 +6,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+arr = [0,6018501,1030026,9120805,1070061,2248520]
 5.times do |i|
   i += 1
 User.create(
@@ -14,7 +14,11 @@ User.create(
   introduction: ("test#{i}"*3),
   profile_image: File.open( "./app/assets/images/sample#{ "%02d" % i }.png", ?r ),
   email: "test#{i}@test.com",
-  password: "password"
+  password: "password",
+  postcode: arr[i],
+  prefecture_code: "test#{i}",
+  address_city: "test#{i}",
+  address_street: "test#{i}",
 )
 Book.create(
   user_id: User.last.id,

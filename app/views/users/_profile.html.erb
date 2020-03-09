@@ -32,10 +32,55 @@
   <!--NO-->
   <%= link_to 'フォローする', user_relationship_path( person ), method: :post, class: "btn btn-success" %>
   <% end %>
+  <% else %>
+  <div id="map">
+    <button onclick="setState()">住所周辺検索</button>
+  </div>
   <% end %>
-  <%= link_to current_user == person ? edit_user_path(current_user) : user_path(current_user) do %>
+  <%= link_to current_user.id == person.id ? edit_user_path(current_user) : user_path(current_user) do %>
   <div class="btn btn-default input-form-size">
     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
   </div>
 </div>
 <% end %>
+
+
+<script>
+  // 郵便番号から住所を取得
+  function setState() {
+    var zip = <%= current_user.postcode.to_s %>;
+
+    $.ajax({
+      type : 'get',
+      url : 'https://maps.googleapis.com/maps/api/geocode/json',
+      crossDomain : true,
+      dataType : 'json',
+      data : {
+        key: 'AIzaSyD4d26ZiO_-77f_BWtdA85FlFSc4zm2EAU',
+        address : zip,
+        language : 'ja',
+        sensor : false
+      }
+    }).done(function (data){
+      // APIのレスポンスから住所情報を取得
+      var obj = data.results[0].geometry.location;
+      showMap( obj );
+    }).fail(function (data) {
+      // 福井県庁
+      alert('住所情報が取得できませんでした');
+      return false;
+    });
+}
+    function showMap(obj) {
+      var MyLatLng;
+      if (obj === undefined ) { MyLatLng = new google.maps.LatLng(36.06528,136.22194); }
+      else { MyLatLng = new google.maps.LatLng( obj.lat, obj.lng ); }
+      var Options = {
+        zoom: 8,      //地図の縮尺値
+        center: MyLatLng,    //地図の中心座標
+        mapTypeId: 'roadmap'   //地図の種類
+      };
+      var map = new google.maps.Map(document.getElementById('map'), Options);
+      return false;
+    }
+</script>
