@@ -34,10 +34,7 @@
   <% end %>
   <% else %>
   <div id="map" value=<%= current_user.postcode %> >住所周辺検索</div>
-  <script>
-    const gKey = "<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API']%>";
-    console.log(gKey);
-  </script>
+  <script>var gKey = "<%=ENV['GOOGLE_MAPS_JAVASCRIPT_API']%>";</script>
   <% end %>
   <%= link_to current_user.id == person.id ? edit_user_path(current_user) : user_path(current_user) do %>
   <div class="btn btn-default input-form-size">

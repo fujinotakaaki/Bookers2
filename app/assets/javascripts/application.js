@@ -33,6 +33,8 @@ $(window).ready( function() {
 
 $(function(){
   $('#map').on('click', function(){
+    var postCode = $(this).attr('value');
+    // console.log( postCode );
     // 郵便番号から住所を取得
     $.ajax({
       type : 'get',
@@ -41,12 +43,13 @@ $(function(){
       dataType : 'json',
       data : {
         key: gKey,
-        address : $(this).attr('value'),
+        address : postCode,
         language : 'ja',
         sensor : false
       }
     }).done(function (data){
       // APIのレスポンスから住所情報を取得
+      console.table(data)
       var obj = data.results[0].geometry.location;
       showMap( obj );
     }).fail(function (data) {
@@ -58,9 +61,7 @@ $(function(){
 });
 
 function showMap( obj ) {
-  var MyLatLng;
-  if (obj === undefined ) { MyLatLng = new google.maps.LatLng(36.06528,136.22194); }
-  else { MyLatLng = new google.maps.LatLng( obj.lat, obj.lng ); }
+  var MyLatLng = new google.maps.LatLng( obj.lat, obj.lng );
   var Options = {
     zoom: 8,      //地図の縮尺値
     center: MyLatLng,    //地図の中心座標
