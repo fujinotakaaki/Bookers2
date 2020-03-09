@@ -17,50 +17,56 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-
-// favoriteボタンをidで識別するための正規表現
-const rege_favorite = /favorite-btn-(\d+)/;
-// お気に入りの登録・解除処理
-$(function(){
-  // テーブル上のaタグが押下されたときの処理
-  $('table tr td a').on('click', function() {
-    // idの取得
-    var a_id = $( this ).attr('id');
-    // favoriteボタンであるかの判定
-    if ( ! rege_favorite.test( a_id ) ) {
-      // favoriteボタンでなければ終了
-      return;
+$(window).ready( function() {
+  $('#user_postcode').jpostal({
+    postcode : [
+      '#user_postcode'
+    ],
+    address : {
+      '#user_prefecture_code'  : '%3',
+      '#user_address_city'  : '%4',
+      '#user_address_street'  : '%5'
     }
-    // favoriteボタンのbook_idを取得
-    var book_id = a_id.match( rege_favorite )[1];
-    $.ajax({
-      url: 'http://localhost:3000' + $( this ).attr('href'),
-      type: ($( this ).attr('data-method')).toUpperCase(),
-      dataType: 'json'
-    })
   });
 });
 
 
-// favoriteボタンをidで識別するための正規表現
-const rege_book_comment = /destroy-book-comment-(\d+)/;
-// コメントの削除処理
 $(function(){
-  // テーブル上のaタグが押下されたときの処理
-  $('table tr td a').on('click', function() {
-    // idの取得
-    var a_id = $( this ).attr('id');
-    // favoriteボタンであるかの判定
-    if ( ! rege_favorite.test( a_id ) ) {
-      // favoriteボタンでなければ終了
-      return;
-    }
-    // favoriteボタンのbook_idを取得
-    var book_id = a_id.match( rege_favorite )[1];
+  $('#map').on('click', function(){
+    var postCode = $(this).attr('value');
+    // console.log( postCode );
+    // 郵便番号から住所を取得
     $.ajax({
-      url: 'http://localhost:3000' + $( this ).attr('href'),
-      type: 'DELETE',
-      dataType: 'json'
-    })
+      type : 'get',
+      url : 'https://maps.googleapis.com/maps/api/geocode/json',
+      crossDomain : true,
+      dataType : 'json',
+      data : {
+        key: gKey,
+        address : postCode,
+        language : 'ja',
+        sensor : false
+      }
+    }).done(function (data){
+      // APIのレスポンスから住所情報を取得
+      console.table(data)
+      var obj = data.results[0].geometry.location;
+      showMap( obj );
+    }).fail(function (data) {
+      // 福井県庁
+      alert('住所情報が取得できませんでした');
+      return false;
+    });
   });
 });
+
+function showMap( obj ) {
+  var MyLatLng = new google.maps.LatLng( obj.lat, obj.lng );
+  var Options = {
+    zoom: 8,      //地図の縮尺値
+    center: MyLatLng,    //地図の中心座標
+    mapTypeId: 'roadmap'   //地図の種類
+  };
+  var map = new google.maps.Map(document.getElementById('map'), Options);
+  return false;
+}
