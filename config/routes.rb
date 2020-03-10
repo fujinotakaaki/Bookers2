@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'chats/show'
+  resources :chats, only: [:show, :create]
   scope :users do
     devise_for :users, controllers: {
       sessions: 'users/sessions',

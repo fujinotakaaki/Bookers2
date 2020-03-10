@@ -34,7 +34,6 @@ $(window).ready( function() {
 $(function(){
   $('#map').on('click', function(){
     var postCode = $(this).attr('value');
-    // console.log( postCode );
     // 郵便番号から住所を取得
     $.ajax({
       type : 'get',
