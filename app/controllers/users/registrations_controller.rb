@@ -10,9 +10,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    if not resource.id.nil? then
+      logger.debug 'Eメールを発信します'
+      UserMailer.thanks_email(resource).deliver
+    else
+      logger.debug 'Eメールは発信されていません'
+    end
+  end
+
 
   # GET /resource/edit
   # def edit
@@ -39,7 +46,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
-
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])

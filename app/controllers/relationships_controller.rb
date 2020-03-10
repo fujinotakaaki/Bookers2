@@ -1,8 +1,8 @@
 class RelationshipsController < ApplicationController
 
   def index
-    logger.debug 'ここみて'
-    logger.debug params.inspect
+    # logger.debug 'ここみて'
+    # logger.debug params.inspect
     if params[:follow_id].nil? then
       relationships = Relationship.where( follower_id: params[:follower_id] )
       @users = relationships.map{ |relationship| User.find( relationship.follow_id ) }

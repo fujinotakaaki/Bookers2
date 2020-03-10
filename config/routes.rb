@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  scope :users do
+    devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations',
+      passwords: 'users/passwords'
+    }
+  end
   resources :books, only: [:create, :destroy, :edit, :index, :show, :update] do
     resource :favorite, only: [:create, :destroy]
     resource :book_comment, only: [:create, :destroy]
