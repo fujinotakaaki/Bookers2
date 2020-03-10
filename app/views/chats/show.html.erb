@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10 col-xs-offset-1">
+      <h2><%= @user.name %>さんとのチャット</h2>
+      <table id='chat-table'>
+        <tr>
+          <th><%= @user.name %></th>
+          <th>You</th>
+        </tr>
+        <% @chats.each do |chat| %>
+        <tr>
+          <% if chat.user_id == current_user.id then%>
+          <td></td>
+          <td><%= chat.comment %></td>
+          <% else %>
+          <td><%= chat.comment %></td>
+          <td></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+
+      <input type="text" id='comment-form'>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#comment-form').keypress( function(e){
+    var comment = $(this).val();
+    if ( ( e.which == 13 ) && /\S/.test(comment) ) {
+      console.log('送信実行');
+      var room_id = $(this).attr('class')
+      $.ajax({
+        type : 'post',
+        url : '/chats',
+        dataType: "script",
+        data : {
+          user_id: <%= current_user.id %>,
+            room_id: <%= @room.id %>,
+            comment: comment
+        }
+      }).done(function (data){
+        console.log('submit success')
+      }).fail(function (data) {
+        console.log('submit false')
+      });
+      return false;
+    }
+    console.log('送信判定');
+  });
+</script>

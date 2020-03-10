@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chats, only: [:show, :create]
   scope :users do
     devise_for :users, controllers: {
       sessions: 'users/sessions',
