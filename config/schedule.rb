@@ -30,6 +30,6 @@ job_type :rbenv_rake, %q!eval "$(rbenv init -)"; cd :path && :environment_variab
 # cronのログの吐き出し場所。ここでエラー内容を確認する
 set :output, "#{Rails.root}/log/cron.log"
 
-every :minute do
-  runner "Book.new( user_id: 4, title: %q?success?, body: %q!unko! ).save"
+every :day do
+  runner "User.all.each{ | user | UserMailer.notification_email( user ).deliver}"
 end
