@@ -76,3 +76,4 @@ gem "refile-mini_magick"
 gem 'jp_prefecture'
 # APIトークン??Railsで使える環境変数を管理できるgem
 gem 'dotenv-rails'
+gem 'whenever', require: false
