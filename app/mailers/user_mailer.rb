@@ -6,8 +6,7 @@ class UserMailer < ApplicationMailer
     mail to: user.email , subject: '私の素敵なサイトへようこそ（大嘘）'
   end
 
-  def notification_email( user )
-    @user = user
-    mail to: user.email , subject: '定期的な通知メールの試験運用'
+  def notification_email
+    mail bcc: User.pluck(:email) , subject: '定期的な通知メールの試験運用'
   end
 end
